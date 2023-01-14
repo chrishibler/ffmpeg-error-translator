@@ -33,3 +33,13 @@ jobs:
 
       - name: Build web
         run: flutter build web
+
+      - name: Publish app
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: ${{ secrets.TARGET_SERVER_USER }}
+            server: ${{ secrets.TARGET_SERVER }}
+            local_path: './src/build/web/*'
+            remote_path: 'ffmpeg.chrishibler.com'
+            sftp_only: true
+            password: ${{ secrets.TARGET_SERVER_PASSWORD }}
